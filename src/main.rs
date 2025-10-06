@@ -1,7 +1,7 @@
 use actix_web::{web, App, HttpServer, Responder};
 
 async fn hello() -> impl Responder {
-    "Hello, world!"
+    "Hello, bite!"
 }
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
