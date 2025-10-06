@@ -16,19 +16,35 @@ pub struct Model {
 
 #[derive(Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
-    // Image,
+    #[sea_orm(has_many = "super::post::Entity")]
+    Posts,
+    #[sea_orm(has_many = "super::like::Entity")]
+    Likes,
+    #[sea_orm(
+        belongs_to = "super::image::Entity",
+        from = "Column::IdImage",
+        to = "super::image::Column::IdImage"
+    )]
+    Image,
 }
 
-// impl RelationTrait for Relation {
-//     fn def(&self) -> RelationDef {
-//         match self {
-//             Self::Image => Entity::belongs_to(super::image::Entity)
-//                 .from(Column::IdImage)
-//                 .to(super::image::Column::IdImage)
-//                 .into(),
-//         }
-//     }
-// }
+impl Related<super::post::Entity> for Entity {
+    fn to() -> RelationDef {
+        Relation::Posts.def()
+    }
+}
+
+impl Related<super::like::Entity> for Entity{
+    fn to() -> RelationDef {
+        Relation::Likes.def()
+    }
+}
+
+impl Related<super::image::Entity> for Entity {
+    fn to() -> RelationDef {
+        Relation::Image.def()
+    }
+}
 
 impl ActiveModelBehavior for ActiveModel {
 
