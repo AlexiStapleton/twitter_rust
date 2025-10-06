@@ -1,15 +1,15 @@
-use actix_web::{web, App, HttpServer, Responder};
+mod models;
+use models::user::{ActiveModel as UserModel, Entity as User};
+use sea_orm::{Database, Set};
+use crate::models::user::ActiveModel;
 
-async fn hello() -> impl Responder {
-    "Hello, bite!"
-}
-#[actix_web::main]
-async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new()
-            .route("/", web::get().to(hello))
-    })
-        .bind("127.0.0.1:8080")?
-        .run()
-        .await
+#[tokio::main]
+async fn main(){
+    let connection = Database::connect("postgres://postgres:postgres@localhost:5432/twitter").await.unwrap();
+
+    // let user1: ActiveModel = UserModel{
+    //     username: Set("bojodo".to_string()),
+    //     hash_password: Set("kjhsdhgfsdfksdhfk".to_string()),
+    //     email: Set
+    // };
 }
