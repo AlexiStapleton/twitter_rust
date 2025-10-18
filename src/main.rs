@@ -1,4 +1,6 @@
 mod models;
+mod database;
+
 use models::user::{ActiveModel as UserModel, Entity as User};
 use sea_orm::{Database, Set};
 use crate::models::user::ActiveModel;
