@@ -7,7 +7,8 @@ use crate::models::user::ActiveModel;
 
 #[tokio::main]
 async fn main(){
-    let connection = Database::connect("postgres://postgres:postgres@localhost:5432/twitter").await.unwrap();
+    let connection = Database::connect("postgres://postgres:postgres@localhost:5432/twitter")
+        .await.unwrap();
 
     // let user1: ActiveModel = UserModel{
     //     username: Set("bojodo".to_string()),
